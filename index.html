@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Date and Time</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2c3e50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #ecf0f1;
+        }
+        #date-time-container {
+            background-color: #34495e;
+            padding: 40px 50px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        #time {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        #date {
+            font-size: 24px;
+            color: #bdc3c7;
+            margin: 10px 0;
+        }
+        .circle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="circle"></div>
+    <div id="date-time-container">
+        <div id="time"></div>
+        <div id="date"></div>
+    </div>
+
+    <script>
+        function displayDateTime() {
+            const today = new Date();
+            
+            // Time formatting (HH:MM:SS)
+            const hours = today.getHours().toString().padStart(2, '0');
+            const minutes = today.getMinutes().toString().padStart(2, '0');
+            const seconds = today.getSeconds().toString().padStart(2, '0');
+            const formattedTime = `${hours}:${minutes}:${seconds}`;
+            
+            // Date formatting
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = today.toLocaleDateString('en-GB', options);
+            
+            // Update the time and date on the page
+            document.getElementById('time').textContent = formattedTime;
+            document.getElementById('date').textContent = formattedDate;
+        }
+
+        // Update the date and time every second (1000 milliseconds)
+        setInterval(displayDateTime, 1000);
+
+        // Call once immediately when the page loads
+        displayDateTime();
+    </script>
+</body>
+</html>
